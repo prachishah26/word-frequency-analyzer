@@ -23,7 +23,7 @@ class WordFrequencyController extends Controller
     
     public function analyzeWordFrequency(Request $request)
     {
-        //becuase this is for 1 functionality, I am writing validation logic here, otherwise need to make different request for it
+        //becuase this is only for 1 functionality, I am writing validation logic here, otherwise need to make different request for it
         $rules = [
             'text' => 'required_without:file|string',
             'file' => 'required_without:text|file|mimes:txt,csv,log|max:16000',  // please set here the file size as per your testing for validation and don't forget to change max file upload size from php.ini file
@@ -72,13 +72,13 @@ class WordFrequencyController extends Controller
             return $this->successResponse($result, 'Word frequency analysed successfully!');
 
         } catch (\Illuminate\Http\Exceptions\PostTooLargeException $exception) {
-            Log::error('File is too large.');
+            Log::error('Error in analyzeWordFrequency@WordFrequencyController: '.$exception->getMessage().' on file: '.$exception->getFile().' on line no.: '. $exception->getLine());
             return $this->errorResponse(
                 'File is too large. Maximum upload size exceeded.',
                 413
             );
         } catch (\Symfony\Component\ErrorHandler\Error\FatalError $exception) {
-            Log::error('Memory limit exceeded in analyzeWordFrequency: ' . $exception->getMessage());
+            Log::error('Error in analyzeWordFrequency@WordFrequencyController: '.$exception->getMessage().' on file: '.$exception->getFile().' on line no.: '. $exception->getLine());
             return $this->errorResponse(
                 'Memory limit exceeded. Please reduce the file size or the text content.',
                 500

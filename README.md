@@ -19,7 +19,10 @@ Run composer install
 Generate key:
 - php artisan key:generate
 
-run the project locally:
+Change database credentials in .env file
+- php artisan migrate 
+
+Run the project locally:
 - php artisan serve
 
 Change below variables in php.ini file in your system as per your need
