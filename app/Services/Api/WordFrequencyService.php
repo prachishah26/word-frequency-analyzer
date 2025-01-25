@@ -39,7 +39,7 @@ class WordFrequencyService
         $file->setFlags(SplFileObject::READ_AHEAD | SplFileObject::SKIP_EMPTY);
 
         // Increase memory limit temporarily if needed
-        ini_set('memory_limit', '512M');  // Increase to 512MB or as needed
+        ini_set('memory_limit', '512M'); //set limit as per the requirement
 
         while (!$file->eof()) {
             $line = Str::lower(preg_replace('/[^\p{L}\p{N}\s]/u', '', $file->fgets()));

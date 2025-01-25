@@ -18,7 +18,7 @@ trait ApiResponseTrait
     public function successResponse($data, $message = 'Request was successful', $statusCode = Response::HTTP_OK)
     {
         return response()->json([
-            'status'  => 'success',
+            'status'  => 1,
             'message' => $message,
             'data'    => $data,
         ], $statusCode);
@@ -35,7 +35,7 @@ trait ApiResponseTrait
     public function errorResponse($message, $statusCode = Response::HTTP_BAD_REQUEST, $data = null)
     {
         return response()->json([
-            'status'  => 'error',
+            'status'  => 0,
             'message' => $message,
             'data'    => $data,
         ], $statusCode);
